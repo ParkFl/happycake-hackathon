@@ -35,21 +35,18 @@ export async function GET(req: Request) {
     const isCatering = item.category === "catering";
     const overCapacity = kitchen.overCapacity || kitchen.remainingCapacityMinutes <= 0;
 
-    let status: "ready_today" | "lead_24h" | "limited" | "sold_out";
+    let status: "ready_today" | "lead_24h" | "sold_out";
     let max_in_cart: number;
 
-    // Stock and capacity are independent: shelf-ready items can be picked up
-    // even when the bake schedule is full. Same truth table as /api/inventory.
+    // Customer-facing rule: shelf wins. If there's product, it's ready_today.
+    // Kitchen capacity only matters when there's nothing on the shelf.
     if (isCustom) {
       status = stock > 0 ? "lead_24h" : "sold_out";
       max_in_cart = 0;
-    } else if (stock > 0 && !overCapacity) {
-      status = (stock <= 3 || kitchen.remainingCapacityMinutes < 30) ? "limited" : "ready_today";
+    } else if (stock > 0) {
+      status = "ready_today";
       max_in_cart = isCatering ? Math.min(stock, 5) : Math.min(stock, 20);
-    } else if (stock > 0 && overCapacity) {
-      status = "limited";
-      max_in_cart = isCatering ? Math.min(stock, 5) : Math.min(stock, 20);
-    } else if (stock <= 0 && !overCapacity) {
+    } else if (!overCapacity) {
       status = "lead_24h";
       max_in_cart = isCatering ? 5 : 20;
     } else {

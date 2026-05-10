@@ -53,24 +53,21 @@ function computeEntry(item: CatalogItem, stock: number, kitchen: { overCapacity:
   let status: Status;
   let max_in_cart: number;
 
+  // Customer-facing truth table — shelf wins:
+  //   stock > 0           → ready_today (don't expose kitchen state to customer)
+  //   stock = 0 + cap OK  → lead_24h
+  //   stock = 0 + over cap → sold_out
   if (isCustom) {
-    // Custom always routes to the owner-approval form regardless of capacity.
-    // We surface lead_24h when there's at least one slot, sold_out when not.
+    // Custom MUST go through the owner-approval form — max_in_cart=0 always.
     status = stock > 0 ? "lead_24h" : "sold_out";
     max_in_cart = 0;
-  } else if (stock > 0 && !overCap) {
-    status = (stock <= 3 || kitchen.remainingCapacityMinutes < 30) ? "limited" : "ready_today";
+  } else if (stock > 0) {
+    status = "ready_today";
     max_in_cart = isCatering ? Math.min(stock, 5) : Math.min(stock, 20);
-  } else if (stock > 0 && overCap) {
-    // Shelf has product but no fresh batch today.
-    status = "limited";
-    max_in_cart = Math.min(stock, isCatering ? 5 : 20);
-  } else if (stock <= 0 && !overCap) {
-    // Shelf empty but kitchen has time — preorder for next bake (~24h).
+  } else if (!overCap) {
     status = "lead_24h";
     max_in_cart = isCatering ? 5 : 20;
   } else {
-    // Shelf empty AND kitchen full — truly sold out for today.
     status = "sold_out";
     max_in_cart = 0;
   }
