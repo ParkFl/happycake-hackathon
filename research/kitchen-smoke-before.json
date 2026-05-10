@@ -1,0 +1,13 @@
+{
+  "dimension": "POS + kitchen handoff",
+  "score": 100,
+  "maxScore": 100,
+  "evidence": [
+    "4 Square/POS simulator order(s)",
+    "2 kitchen ticket(s)",
+    "0 accepted, 1 ready, 0 rejected/escalated"
+  ],
+  "gaps": [
+    "No capacity-aware accept/reject decision"
+  ]
+}

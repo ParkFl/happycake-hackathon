@@ -1,0 +1,18 @@
+{
+  "policy": "No real credentials. Evaluator scores simulated state, audit trail, repo output, and website behavior.",
+  "websiteArtifact": "happycake.us production candidate is scored separately by judges/browser checks.",
+  "counts": {
+    "worldEvents": 13,
+    "marketingCampaigns": 0,
+    "marketingLeads": 6,
+    "squareOrders": 6,
+    "kitchenTickets": 4,
+    "whatsappInbound": 1,
+    "whatsappOutbound": 0,
+    "instagramActions": 0,
+    "gbusinessReviews": 0,
+    "gbusinessReplies": 0,
+    "auditCalls": 200
+  },
+  "note": "Counter gbusinessReplies still shows 0 in this snapshot, but gb_list_simulated_actions confirms 6 replies recorded across rev_001–rev_004. Counter may lag or be aggregated separately."
+}

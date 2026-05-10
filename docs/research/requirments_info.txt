@@ -1,0 +1,183 @@
+A real business, run by hand.
+Happy Cake US is operating in Sugar Land, Texas. Customers walk in, buy, and leave. There's one WhatsApp number where the owner sometimes replies and sometimes takes an order — by hand. There's an Instagram account that functions as a window display, not a sales channel. The website is a placeholder.
+
+Your job is to fix this. Turn each channel into a real sales engine. Make the $500/month marketing budget perform like $5,000. Generate leads. Convert them. Hand-off to production cleanly. The owner — Askhat, who runs Steppe Business Club — will be the first user.
+
+Today's reality
+
+Walk-in only sales, ~$15–20K/month
+One WhatsApp line, manually answered
+Instagram as a window display, no sales
+Website is a placeholder
+$500/mo to spend, no idea how
+The outcomes
+
+Four channels, plus an agent-friendly website, all alive on Monday.
+We're describing outcomes, not implementation. Decompose it however you like — one super-agent that handles all four, four specialised agents, seven micro-agents with a router, anything. The judging looks at whether the channels actually work, not at how many agents you have. The only thing we lock down is the runtime — see below.
+
+Website that sells
+happycake.us, alive
+
+Catalog with prices, photos, and inventory that is honest about what is in stock
+Agent-readable product and policy data so an AI customer can understand the offer
+Order intake on the site, routed to the kitchen and cashier in real time
+On-site assistant for product guidance, custom orders, complaints, status, and handoff
+Inventory and production schedule visible — no false promises
+Tracks the customer from first click to confirmed pickup
+WhatsApp that answers
+A 24/7 sales rep with brand manners
+
+Replies in brand voice in seconds, in English, all day
+Knows the menu, prices, allergens, hours, and what's in stock right now
+Takes orders inside the chat — same record as a website order
+Hands off to a human cleanly when it's out of its depth
+Instagram that converts
+From window display to checkout
+
+Posts, stories, comments, DMs — all in brand voice, all on schedule
+Captures orders from DM and routes them to production and cashier
+Surfaces the right product link based on conversation context
+Turns followers into buyers, not just spectators
+Marketing that punches above its weight
+Make $500 work like $5,000
+
+Allocates the $500/mo across Meta Ads, Google Ads, boosted posts, organic — your call
+Justifies every dollar with margin data from Square and a measurable hypothesis
+Generates the creatives, schedules them, queues them for owner approval
+Measures result, adjusts plan, reports back. Closes the loop.
+The business
+
+Happy Cake US in Sugar Land, TX. Coffee and desserts. Two years operating, currently $15–20K/month, owner-operated, all manual. You'll work with anonymized real data, real menu, real product photography, and a brand book written specifically for this hackathon. The system you ship goes live the week after.
+
+Runtime
+
+Claude Code on the computer. Telegram for the owner. That's it.
+The agent runs as Claude Code CLI on the owner's computer. The owner talks to the agent through Telegram bots — never email, never web dashboard, never anything else. When a customer messages on WhatsApp or Instagram, the message tunnels into the computer through ngrok or Cloudflare Tunnel, hits the agent's bot wrapper, which calls `claude -p` (headless mode) and pushes the response back to the customer.
+
+Owner interface — Telegram only
+Daily reports, approval requests, anomalies, one-tap controls — everything goes to one or more Telegram bots. One agent → one bot. Several agents → several bots. No other interfaces. The owner already lives in Telegram; meet him there.
+
+Agent runtime — Claude Code CLI
+Each agent is a Claude Code project on the computer, with its own~/.claude/ config and MCP server connections. Bot wrappers shell out to claude -pfor each event. No Claude Agent SDK, no LangGraph, no CrewAI, no custom servers.
+
+Hard rule
+
+Agents must run on Claude Code CLI with Opus 4.7. Owner-facing UI must be Telegram. Submissions that route through Claude Agent SDK, a different LLM provider, a different framework, or expose any non-Telegram owner UI are disqualified. This is what the hackathon is for — getting fluent at building real systems with the actual CLI.
+
+Format
+Built for builders, not for slides.
+Team size
+Up to 3 people
+Format
+Onsite + online
+Language
+English, end-to-end
+Runtime
+Claude Code CLI · Opus 4.7
+Owner UI
+Telegram bot(s) only
+Submission
+Public Git repository
+
+Show up ready to build.
+We provide the sandbox pack, the data, and the MCP servers. You bring your computer, your subscription, and a development environment that's already working before kickoff. We don't hand out tokens, credits, or seats — usage is on you.
+
+Required on your machine
+Active Claude Max subscription
+Claude Code CLI installed
+Git, GitHub account with SSH set up
+Any tool that gives your computer a public URL so WhatsApp and Instagram can deliver inbound messages to your local agent. Install one before May 9.
+A Telegram account for testing bots
+Strongly recommended
+Familiarity with Claude Code
+Comfortable building Telegram bots in your language of choice
+Read of the brief once it opens — don't start coding cold
+A computer you can carry through 24 hours
+We will not provide Claude API credits, Anthropic seats, or compute reimbursement. Bring your own subscription. Plan for heavy Opus 4.7 usage during the 24 hours.
+
+Schedule
+
+From open to leaderboard in under 30 hours.
+May 2
+Matchmaking opens
+Solo participants and incomplete teams find each other on the platform. Brief stays sealed.
+
+May 9–10
+Open participation
+Late arrivals can register, form teams, and start on the same terms. The final deadline stays the same for everyone.
+
+May 9 · 10:00 CT
+Hackathon opens
+Brief, sandbox pack, and MCP credentials go live. The 24-hour timer starts.
+
+May 10 · 10:00 CT
+Submissions due
+Push final commit. Repository must be public.
+
+May 10 · 10:00 CT
+Evaluator runs
+Seven-pass AI evaluator clones every repo, stands up the stack, drives Telegram bots, browser flows, AI-agent ordering, and customer simulations.
+
+May 10 · 16:00 CT
+Results published
+Leaderboard goes live. Final standings settled.
+
+Judging
+
+100% AI-judged. 100% transparent.
+Seven specialised AI passes evaluate every submission identically. The evaluator clones your repo, stands the stack up via your README, drives Telegram bots, browser flows, AI-agent ordering, on-site assistant conversations, and customer simulations across all four channels, then writes a JSON report with cited evidence. Same procedure, same model, same prompts for everyone.
+
+20 pts
+Functional tester
+Drives simulated customer scenarios across WhatsApp, Instagram, and the website. Public scenarios are practice; secret ones decide.
+
+15 pts
+Agent-friendliness auditor
+Uses an AI agent as a customer: reads the site, understands products and policies, configures a cake, checks constraints, and reaches order intent without brittle scraping.
+
+15 pts
+On-site assistant evaluator
+Tests the embedded assistant on product guidance, custom orders, complaints, order-status questions, MCP-backed facts, and clean owner escalation.
+
+10 pts
+Code reviewer
+Architecture, agent decomposition, MCP usage, README clarity, fresh-clone reproducibility, and secret hygiene.
+
+15 pts
+Operator simulator
+Drives the Telegram bot(s) as if it were the owner — approves, rejects, asks status, runs reports. Asks: can a non-technical operator run this?
+
+15 pts
+Business analyst
+Reads the README hypothesis, sanity-checks the numbers against the sales CSV, rates whether the $500 plan plausibly performs like $5,000.
+
+10 pts
+Innovation and depth spotter
+Searches for surprising, original moves and deep edge-case handling. Bonus only — never a substitute for working evidence.
+
+Hardcoded test answers cost 10 pts and a public note.
+Full evaluator prompts publish after results.
+No appeals — the AI verdict is final.
+Sandbox pack
+
+Plumbing solved. Skip OAuth, ship product.
+Twenty-four hours is for product, not for OAuth screens. Every team gets the same starter kit and no real Happy Cake account credentials — no advantage by who slept less.
+
+Hosted MCP simulator for Square/POS, WhatsApp, Instagram, Google Business, marketing, kitchen, world events, and evaluator evidence — one endpoint, scoped per team
+Seeded sales history, POS catalog, inventory, margins, and campaign constraints for the $500 → $5,000 challenge
+High-resolution cake photography and product shots
+Happy Cake US brand book v1 — voice, palette, content rules
+Website/storefront requirements for a deployable happycake.us candidate, including agent-readable structure and on-site assistant behavior
+Simulated customer profiles, inbound messages, reviews, campaign traffic, complaints, capacity pressure, and secret evaluator events
+Telegram bot starter snippets — Python and TypeScript reference for the headless-mode pattern
+Hackathon participation agreement — NDA + IP terms — signed at registration
+Eligibility
+
+Open to any team that ships in English.
+Solo applicants welcome — you'll match into teams in the week before the start. Onsite and online participants compete on the same terms; everything publishes through this site.
+
+Legal
+
+NDA at registration. Sandbox data, brand assets, and CSV stay confidential.
+Submissions assign full IP ownership of the deliverable to Steppe Business Club, with a license back to the team for portfolio use.
+Repos must be public after the event so other residents can fork.

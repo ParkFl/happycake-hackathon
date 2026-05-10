@@ -1,0 +1,12 @@
+{
+  "inbound": [
+    {
+      "ts": "2026-05-09T21:59:41.610Z",
+      "from": "+18325550199",
+      "message": "Hi! It is my mom 60th birthday on Saturday. What do you have for 8 people?",
+      "direction": "inbound"
+    }
+  ],
+  "outbound": [],
+  "simulated": true
+}

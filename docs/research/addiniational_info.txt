@@ -1,0 +1,74 @@
+The brief
+
+Agentic AI for Happy Cake US
+Read the full brief end-to-end before you write a line of code. Sandbox pack and MCP credentials are linked at the bottom.
+
+Markdown brief for Claude Code
+
+Download the full task as a Markdown file and give it to your coding agent before planning the build.
+
+Download .md
+01 · The business and the problem
+
+Happy Cake US is operating in Sugar Land, Texas. Owner-run, all manual, ~$15–20K/month, walk-in only. There is one WhatsApp number where the owner sometimes replies and sometimes takes an order — by hand. The Instagram account functions as a window display, not a sales channel. The website is a placeholder. The marketing budget is $500/month.
+Your job is to fix this — make every channel sell, and make the $500/month perform like $5,000.
+
+02 · The four outcomes
+
+We describe outcomes, not implementation. How you decompose into agents is your call: one agent that handles everything, four specialised agents, seven micro-agents with a router — anything the constraints below allow.
+Website as production artifact: the winning website is expected to become the future happycake.us production site after the hackathon. Build it as a real sales system, not a mockup.
+
+Website that sells — happycake.us alive with catalog, prices, photos, honest inventory, order intake, kitchen and cashier handoff.
+Agent-friendly website — a customer-side AI agent can read the site, understand products and policies, configure a cake, check constraints, and reach order intent without brittle scraping.
+On-site assistant — embedded assistant handles product guidance, complex custom orders, complaints, order-status questions, and owner escalation using sandbox evidence instead of invented facts.
+WhatsApp that answers — replies in brand voice in seconds, knows the menu and inventory, takes orders, hands off to a human cleanly.
+Instagram that converts — posts, stories, comments, DMs in brand voice; captures orders from DM and routes them to production.
+Marketing that punches above its weight — allocates the $500/mo across Meta Ads, Google Ads, boosts, organic. Justifies every dollar with margin data.
+03 · Runtime and the hard rules
+
+The runtime is fixed:
+Agents run on Claude Code CLI, locally on the operator's machine, with Claude Opus 4.7. No Claude Agent SDK, no LangGraph, no CrewAI, no n8n, no other LLM provider.
+Owner-facing UI is Telegram. One agent → one bot. Multiple agents → multiple bots. No web dashboards, no email digests, no other interfaces.
+Headless mode is the bridge. Telegram bots invoke claude -p "<prompt>" to run an agent on demand and stream the answer back into Telegram or the customer channel.
+Inbound webhooks tunnel home. WhatsApp and Instagram webhooks reach the computer via ngrok or Cloudflare Tunnel — small free tools that give your local machine a public URL.
+Submissions that violate any of these rules are disqualified. The point of this event is to get fluent at building real systems with the actual Claude Code CLI — not to reinvent the runtime.
+
+Bring your own Claude Max subscription. We do not provide credits, tokens, or seats.
+
+04 · The standard runtime pattern
+
+Every team will end up with something like this on their MacBook:
+# 1. WhatsApp / IG webhook hits ngrok URL
+# 2. Telegram bot wrapper picks it up (or, owner pings the bot directly)
+# 3. Wrapper shells out to claude -p with context
+
+claude -p "Customer wrote in WhatsApp: 'Do you have honey cake today?' \
+           Use the inventory MCP to check, reply in brand voice, \
+           if you take an order, queue it via the orders MCP."
+
+# 4. Response streams back. Wrapper sends to customer channel + logs to Telegram.
+# 5. If approval needed, wrapper messages Askhat in Telegram with inline yes/no buttons.
+We provide reference snippets in the sandbox pack — Python and TypeScript variants of the wrapper, examples of slash commands you can define in .claude/commands/, and example MCP configs.
+
+05 · Submission
+
+Push your final commit to a public Git repository. That is the entire submission.
+README must contain:
+
+Setup instructions — how the evaluator stands the system up from a fresh clone
+ARCHITECTURE.md — how you decomposed (or did not decompose) into agents, MCP usage, owner-bot mapping
+.env.example with every key the wrappers need (the evaluator fills with its own sandbox credentials)
+Business-impact hypothesis with quantified expectations — including the $500 → $5,000 case
+Agent-friendliness notes: how an AI customer can understand the site and place/order-intent a cake
+On-site assistant test script covering consultation, custom order, complaint, status, and escalation paths
+List of Telegram bots your stack creates and what each one does
+Hard deadline — May 10, 10:00 CT.
+
+06 · Evaluation
+
+Seven AI passes evaluate every submission identically. The evaluator clones your repo, stands up the stack via your README, drives Telegram bots, browser flows, AI-agent ordering, on-site assistant conversations, and customer-channel simulations across all outcomes, then writes a JSON report with cited evidence. The verdict is final. There is no appeals process.
+See judging for the full rubric.
+
+07 · Sandbox pack
+
+Available at /hackathon/brief/sandbox. Contains: hosted MCP server URLs and per-team tokens (Square, WhatsApp, Instagram, Google Business), anonymized 6-month sales CSV, markdown brandbook, approved photo/logo pack, website/storefront requirements and starter snippets, Telegram bot starter snippets in Python and TypeScript, simulated customer profiles with phone numbers and IG handles.

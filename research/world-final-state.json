@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "scenarioId": "launch-day-revenue-engine",
+  "currentMinute": 165,
+  "deliveredSeededEvents": 6,
+  "remainingSeededEvents": 0,
+  "timelineEvents": 13,
+  "byChannel": {
+    "system": 7,
+    "whatsapp": 1,
+    "instagram": 1,
+    "marketing": 1,
+    "square": 1,
+    "gbusiness": 1,
+    "kitchen": 1
+  },
+  "deterministic": true,
+  "timeCompression": "1 simulator hour = 10 real minutes"
+}

@@ -1,0 +1,286 @@
+{
+  "count": 17,
+  "channels": [
+    {
+      "name": "gb_get_metrics",
+      "description": "Fetch sandbox metrics: views, calls, direction requests for the period.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string",
+            "description": "last_7_days | last_30_days"
+          }
+        }
+      }
+    },
+    {
+      "name": "gb_list_reviews",
+      "description": "Recent reviews on the Happy Cake US Google Business profile.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "gb_list_simulated_actions",
+      "description": "Inspect everything this team has recorded in the GMB simulation namespace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "gb_simulate_post",
+      "description": "Record a proposed Google Business post. Simulated. Used by the team's marketing agent for daily/weekly community updates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "callToAction": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "photoUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      }
+    },
+    {
+      "name": "gb_simulate_reply",
+      "description": "Record a proposed reply to a review. Simulated — does NOT actually post to Google. The evaluator checks both the existence and the wording of the reply.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "string"
+          },
+          "reply": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reviewId",
+          "reply"
+        ]
+      }
+    },
+    {
+      "name": "instagram_approve_post",
+      "description": "Owner-side helper used by the team's Telegram bot when the owner taps \"Approve\".",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scheduledPostId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scheduledPostId"
+        ]
+      }
+    },
+    {
+      "name": "instagram_inject_dm",
+      "description": "Test-only: inject a simulated inbound DM from a fake follower.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "description": "IG handle of simulated follower."
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "threadId",
+          "from",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "instagram_list_dm_threads",
+      "description": "List the team's recent Instagram DM conversations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "instagram_publish_post",
+      "description": "Publish an approved post from the queue. Reject with an error if the post hasn't been approved by the owner yet.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scheduledPostId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scheduledPostId"
+        ]
+      }
+    },
+    {
+      "name": "instagram_register_webhook",
+      "description": "Register a public URL where this team wants to receive inbound Instagram DM and comment events. The MCP server forwards simulated events from the shared dev account to that URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A public HTTPS URL on your ngrok or Cloudflare Tunnel."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "instagram_reply_to_comment",
+      "description": "Reply to a comment under an Instagram post.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "commentId",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "instagram_schedule_post",
+      "description": "Queue a post for owner approval. Returns a scheduledPostId. Posts are NEVER published until instagram_publish_post is called by the agent after owner approval.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "scheduledFor": {
+            "type": "string",
+            "description": "ISO 8601 timestamp."
+          }
+        },
+        "required": [
+          "imageUrl",
+          "caption"
+        ]
+      }
+    },
+    {
+      "name": "instagram_send_dm",
+      "description": "Send a direct message to an Instagram user thread.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "threadId",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_inject_inbound",
+      "description": "Test-only: inject a simulated inbound WhatsApp message from a fake customer. Used by the evaluator and by teams to dry-run their own agents. Does NOT actually message anyone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "E.164 phone number of the simulated customer."
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_list_threads",
+      "description": "List recent WhatsApp conversations the team has handled.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "whatsapp_register_webhook",
+      "description": "Register a public URL where this team wants to receive inbound WhatsApp message events. The MCP server will forward incoming events from the shared sandbox to that URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A public HTTPS URL on your ngrok or Cloudflare Tunnel."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_send",
+      "description": "Send a text message to a customer on WhatsApp. The customer must be in the team's whitelisted simulated customers list during the hackathon.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "E.164 phone number, e.g. +12815551001."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message body. English only."
+          }
+        },
+        "required": [
+          "to",
+          "message"
+        ]
+      }
+    }
+  ]
+}

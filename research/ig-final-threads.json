@@ -1,0 +1,33 @@
+{
+  "inbound": [
+    {
+      "ts": "2026-05-09T22:00:33.135Z",
+      "from": "@maya_houston",
+      "message": "Do you have anything for an office of 12 people for Friday morning?",
+      "threadId": "ig_thread_smoke_001"
+    }
+  ],
+  "outbound": [
+    {
+      "ts": "2026-05-09T22:00:57.622Z",
+      "message": "Hi Maya — yes, our Office dessert box is made for this. $120, assorted desserts, comfortable for a 12-person office. Friday morning pickup is open; want me to hold a slot?\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule",
+      "threadId": "ig_thread_smoke_001"
+    },
+    {
+      "ts": "2026-05-09T22:07:14.827Z",
+      "message": "Hi! 3 Office dessert boxes for Monday — yes we can. $360 total. Want me to hold a slot? Need pickup time and a phone number for confirmations.\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule",
+      "threadId": "@officeadmin"
+    },
+    {
+      "ts": "2026-05-09T22:18:02.605Z",
+      "message": "Hi! Yes the Office dessert box is $120 and we have Friday slots open. — Saule",
+      "threadId": "ig_smoke_a"
+    },
+    {
+      "ts": "2026-05-09T22:18:05.743Z",
+      "message": "Welcome back — happy to hold a whole cake \"Honey\" for Saturday. — Saule",
+      "threadId": "ig_smoke_b"
+    }
+  ],
+  "simulated": true
+}

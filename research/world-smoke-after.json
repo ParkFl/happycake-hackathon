@@ -1,0 +1,31 @@
+{
+  "score": {
+    "dimension": "world scenario execution",
+    "score": 100,
+    "maxScore": 100,
+    "evidence": [
+      "Scenario started",
+      "13 event(s) in timeline",
+      "6 event(s) delivered",
+      "193 recent MCP call(s) in mcp_audit_log"
+    ],
+    "gaps": []
+  },
+  "evidence": {
+    "policy": "No real credentials. Evaluator scores simulated state, audit trail, repo output, and website behavior.",
+    "websiteArtifact": "happycake.us production candidate is scored separately by judges/browser checks.",
+    "counts": {
+      "worldEvents": 13,
+      "marketingCampaigns": 0,
+      "marketingLeads": 6,
+      "squareOrders": 6,
+      "kitchenTickets": 4,
+      "whatsappInbound": 1,
+      "whatsappOutbound": 0,
+      "instagramActions": 0,
+      "gbusinessReviews": 0,
+      "gbusinessReplies": 0,
+      "auditCalls": 194
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "dimension": "world scenario execution",
+  "score": 97,
+  "maxScore": 100,
+  "evidence": [
+    "Scenario started",
+    "6 event(s) in timeline",
+    "4 event(s) delivered",
+    "167 recent MCP call(s) in mcp_audit_log"
+  ],
+  "gaps": []
+}

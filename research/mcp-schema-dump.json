@@ -1,0 +1,374 @@
+{
+  "square_list_catalog": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"mode\": \"simulated\",\n  \"catalog\": [\n    {\n      \"id\": \"sq_item_honey_cake_slice\",\n      \"variationId\": \"sq_var_honey_cake_slice\",\n      \"name\": \"Honey cake slice\",\n      \"category\": \"slices\",\n      \"priceCents\": 850,\n      \"description\": \"Individual honey cake slice for walk-ins and quick pickup.\",\n      \"kitchenProductId\": \"honey-cake-slice\"\n    },\n    {\n      \"id\": \"sq_item_whole_honey_cake\",\n      \"variationId\": \"sq_var_whole_honey_cake\",\n      \"name\": \"Whole honey cake\",\n      \"category\": \"whole-cakes\",\n      \"priceCents\": 5500,\n      \"description\": \"Classic whole honey cake for family orders.\",\n      \"kitchenProductId\": \"whole-honey-cake\"\n    },\n    {\n      \"id\": \"sq_item_pistachio_roll\",\n      \"variationId\": \"sq_var_pistachio_roll\",\n      \"name\": \"Pistachio roll\",\n      \"category\": \"slices\",\n      \"priceCents\": 950,\n      \"description\": \"Premium pistachio roll dessert.\",\n      \"kitchenProductId\": \"pistachio-roll\"\n    },\n    {\n      \"id\": \"sq_item_custom_birthday_cake\",\n      \"variationId\": \"sq_var_custom_birthday_cake\",\n      \"name\": \"Custom birthday cake\",\n      \"category\": \"custom\",\n      \"priceCents\": 9500,\n      \"description\": \"Custom celebration cake with human approval required.\",\n      \"kitchenProductId\": \"custom-birthday-cake\"\n    },\n    {\n      \"id\": \"sq_item_office_dessert_box\",\n      \"variationId\": \"sq_var_office_dessert_box\",\n      \"name\": \"Office dessert box\",\n      \"category\": \"catering\",\n      \"priceCents\": 12000,\n      \"description\": \"Assorted dessert box for offices and events.\",\n      \"kitchenProductId\": \"office-dessert-box\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "square_get_pos_summary": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"mode\": \"simulated\",\n  \"orders\": 2,\n  \"revenueCents\": 11000,\n  \"byStatus\": {\n    \"open\": 2\n  },\n  \"bySource\": {\n    \"agent\": 2\n  },\n  \"events\": 2,\n  \"kitchenHandoffRecommended\": 2\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "square_create_order": [
+    {
+      "request_payload": {
+        "items": [
+          {
+            "variationId": "sq_var_whole_honey_cake",
+            "quantity": 1
+          }
+        ],
+        "customerPhone": "+18325550199",
+        "customerName": "Alibi"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"mode\": \"simulated\",\n  \"order\": {\n    \"id\": \"sq_order_1778357975670\",\n    \"source\": \"agent\",\n    \"customerName\": \"Alibi\",\n    \"items\": [\n      {\n        \"variationId\": \"sq_var_whole_honey_cake\",\n        \"quantity\": 1,\n        \"name\": \"Whole honey cake\",\n        \"priceCents\": 5500,\n        \"kitchenProductId\": \"whole-honey-cake\"\n      }\n    ],\n    \"totalCents\": 5500,\n    \"status\": \"open\",\n    \"kitchenHandoffRecommended\": true,\n    \"createdAt\": \"2026-05-09T20:19:35.670Z\",\n    \"updatedAt\": \"2026-05-09T20:19:35.670Z\"\n  },\n  \"kitchenTool\": \"kitchen_create_ticket\"\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "square_update_order_status": [
+    {
+      "request_payload": {
+        "orderId": "sim_order_123",
+        "status": "in_kitchen"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: Order not found"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "kitchen_get_production_summary": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"tickets\": 0,\n  \"byStatus\": {},\n  \"events\": 0,\n  \"dailyCapacityMinutes\": 420,\n  \"usedPrepMinutes\": 0,\n  \"remainingCapacityMinutes\": 420,\n  \"overCapacity\": false\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "kitchen_create_ticket": [
+    {
+      "request_payload": {
+        "orderId": "sim_order_123",
+        "customerName": "Alibi",
+        "items": [
+          {
+            "productId": "whole-honey-cake",
+            "quantity": 1
+          }
+        ]
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"ticketId\": \"kt_1778357976618\",\n  \"status\": \"queued\",\n  \"ticket\": {\n    \"id\": \"kt_1778357976618\",\n    \"orderId\": \"sim_order_123\",\n    \"customerName\": \"Alibi\",\n    \"items\": [\n      {\n        \"productId\": \"whole-honey-cake\",\n        \"quantity\": 1\n      }\n    ],\n    \"status\": \"queued\",\n    \"estimatedPrepMinutes\": 25,\n    \"estimatedReadyAt\": \"2026-05-09T21:19:36.618Z\",\n    \"createdAt\": \"2026-05-09T20:19:36.618Z\"\n  }\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "kitchen_accept_ticket": [
+    {
+      "request_payload": {
+        "ticketId": "tick_123",
+        "estimatedMinutes": 45
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: Ticket not found"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "kitchen_reject_ticket": [
+    {
+      "request_payload": {
+        "ticketId": "tick_123",
+        "reason": "Kitchen is over capacity"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: Ticket not found"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "marketing_create_campaign": [
+    {
+      "request_payload": {
+        "name": "Weekend Honey Cake",
+        "platform": "instagram",
+        "budgetUsd": 50
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: name, channel, objective, targetAudience, and offer are required"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "marketing_launch_simulated_campaign": [
+    {
+      "request_payload": {
+        "campaignId": "camp_123"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: Campaign not found"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "marketing_generate_leads": [
+    {
+      "request_payload": {
+        "campaignId": "camp_123"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"generated\": 3,\n  \"leads\": [\n    {\n      \"id\": \"lead_1778357977809_1\",\n      \"campaignId\": \"camp_123\",\n      \"customerName\": \"Maya R.\",\n      \"channel\": \"instagram\",\n      \"intent\": \"birthday cake for Saturday\",\n      \"estimatedOrderValueUsd\": 95\n    },\n    {\n      \"id\": \"lead_1778357977809_2\",\n      \"campaignId\": \"camp_123\",\n      \"customerName\": \"James K.\",\n      \"channel\": \"google_local\",\n      \"intent\": \"office dessert box for 12 people\",\n      \"estimatedOrderValueUsd\": 120\n    },\n    {\n      \"id\": \"lead_1778357977809_3\",\n      \"campaignId\": \"camp_123\",\n      \"customerName\": \"Nora P.\",\n      \"channel\": \"website\",\n      \"intent\": \"honey cake pickup today\",\n      \"estimatedOrderValueUsd\": 55\n    }\n  ]\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "marketing_report_to_owner": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"budgetUsd\": 500,\n  \"targetEffectUsd\": 5000,\n  \"campaignsCreated\": 0,\n  \"launches\": 0,\n  \"leadsGenerated\": 6,\n  \"leadsRouted\": 0,\n  \"adjustments\": 0,\n  \"projectedRevenueUsd\": 0,\n  \"ownerSummary\": \"Marketing simulator summary: 0 campaign(s), 6 lead(s), projected revenue $0.\",\n  \"reportedAt\": \"2026-05-09T20:19:38.104Z\"\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "world_start_scenario": [
+    {
+      "request_payload": {
+        "scenarioId": "test"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: Unknown scenarioId"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "world_next_event": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: No active scenario. Call world_start_scenario first."
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "world_advance_time": [
+    {
+      "request_payload": {
+        "minutes": 30
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: No active scenario. Call world_start_scenario first."
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ],
+  "world_get_scenario_summary": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"status\": \"not_started\",\n  \"timelineEvents\": 0\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "evaluator_get_evidence_summary": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"policy\": \"No real credentials. Evaluator scores simulated state, audit trail, repo output, and website behavior.\",\n  \"websiteArtifact\": \"happycake.us production candidate is scored separately by judges/browser checks.\",\n  \"counts\": {\n    \"worldEvents\": 0,\n    \"marketingCampaigns\": 0,\n    \"marketingLeads\": 6,\n    \"squareOrders\": 3,\n    \"kitchenTickets\": 1,\n    \"whatsappInbound\": 0,\n    \"whatsappOutbound\": 0,\n    \"instagramActions\": 0,\n    \"gbusinessReviews\": 0,\n    \"gbusinessReplies\": 0,\n    \"auditCalls\": 82\n  }\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "evaluator_score_world_scenario": [
+    {
+      "request_payload": {
+        "scenarioId": "test"
+      },
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dimension\": \"world scenario execution\",\n  \"score\": 40,\n  \"maxScore\": 100,\n  \"evidence\": [\n    \"No active scenario run\",\n    \"0 event(s) in timeline\",\n    \"0 event(s) delivered\",\n    \"83 recent MCP call(s) in mcp_audit_log\"\n  ],\n  \"gaps\": [\n    \"No world_start_scenario evidence\",\n    \"No world_next_event/world_advance_time delivery evidence\"\n  ]\n}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "evaluator_generate_team_report": [
+    {
+      "request_payload": {},
+      "mcp_response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"policy\": \"No real credentials. No writes to real business/social accounts. Evaluator scores simulated state and repo/website evidence.\",\n  \"websiteArtifact\": \"happycake.us production candidate URL to be checked by judges\",\n  \"repoUrl\": \"repo URL not provided\",\n  \"notes\": null,\n  \"score\": 51,\n  \"maxScore\": 100,\n  \"dimensions\": [\n    {\n      \"dimension\": \"marketing loop\",\n      \"score\": 100,\n      \"maxScore\": 100,\n      \"evidence\": [\n        \"0 campaign(s) created\",\n        \"6 simulated lead(s) generated/routed\",\n        \"3 owner report(s) recorded\",\n        \"3 POS-style order(s) available for attribution\"\n      ],\n      \"gaps\": [\n        \"No campaign created\"\n      ]\n    },\n    {\n      \"dimension\": \"POS + kitchen handoff\",\n      \"score\": 65,\n      \"maxScore\": 100,\n      \"evidence\": [\n        \"3 Square/POS simulator order(s)\",\n        \"1 kitchen ticket(s)\",\n        \"0 accepted, 0 ready, 0 rejected/escalated\"\n      ],\n      \"gaps\": [\n        \"No capacity-aware accept/reject decision\",\n        \"No ready-for-pickup completion evidence\"\n      ]\n    },\n    {\n      \"dimension\": \"channel response\",\n      \"score\": 0,\n      \"maxScore\": 100,\n      \"evidence\": [\n        \"0 WhatsApp inbound event(s)\",\n        \"0 WhatsApp response(s)\",\n        \"0 Instagram action(s)\",\n        \"0 Google review(s), 0 proposed reply/replies\"\n      ],\n      \"gaps\": [\n        \"No channel events processed\",\n        \"No WhatsApp response evidence\",\n        \"No Instagram handling evidence\",\n        \"No Google Business review reply evidence\"\n      ]\n    },\n    {\n      \"dimension\": \"world scenario execution\",\n      \"score\": 40,\n      \"maxScore\": 100,\n      \"evidence\": [\n        \"No active scenario run\",\n        \"0 event(s) in timeline\",\n        \"0 event(s) delivered\",\n        \"84 recent MCP call(s) in mcp_audit_log\"\n      ],\n      \"gaps\": [\n        \"No world_start_scenario evidence\",\n        \"No world_next_event/world_advance_time delivery evidence\"\n      ]\n    }\n  ],\n  \"nextJudgeChecks\": [\n    \"Review GitHub repo architecture and .env.example for secret hygiene.\",\n    \"Browse the website as a happycake.us production artifact: UX, conversion, order intent, deployability.\",\n    \"Replay world scenario and compare timeline/audit evidence with README claims.\",\n    \"Check owner approval, escalation, capacity promises, and post-hackathon real-adapter path.\"\n  ]\n}"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

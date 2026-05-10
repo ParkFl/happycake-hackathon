@@ -1,0 +1,915 @@
+{
+  "count": 55,
+  "names": [
+    "evaluator_generate_team_report",
+    "evaluator_get_evidence_summary",
+    "evaluator_score_channel_response",
+    "evaluator_score_marketing_loop",
+    "evaluator_score_pos_kitchen_flow",
+    "evaluator_score_world_scenario",
+    "gb_get_metrics",
+    "gb_list_reviews",
+    "gb_list_simulated_actions",
+    "gb_simulate_post",
+    "gb_simulate_reply",
+    "instagram_approve_post",
+    "instagram_inject_dm",
+    "instagram_list_dm_threads",
+    "instagram_publish_post",
+    "instagram_register_webhook",
+    "instagram_reply_to_comment",
+    "instagram_schedule_post",
+    "instagram_send_dm",
+    "kitchen_accept_ticket",
+    "kitchen_create_ticket",
+    "kitchen_get_capacity",
+    "kitchen_get_menu_constraints",
+    "kitchen_get_production_summary",
+    "kitchen_list_tickets",
+    "kitchen_mark_ready",
+    "kitchen_reject_ticket",
+    "marketing_adjust_campaign",
+    "marketing_create_campaign",
+    "marketing_generate_leads",
+    "marketing_get_budget",
+    "marketing_get_campaign_metrics",
+    "marketing_get_margin_by_product",
+    "marketing_get_sales_history",
+    "marketing_launch_simulated_campaign",
+    "marketing_report_to_owner",
+    "marketing_route_lead",
+    "square_create_order",
+    "square_get_inventory",
+    "square_get_pos_summary",
+    "square_list_catalog",
+    "square_recent_orders",
+    "square_recent_sales_csv",
+    "square_update_order_status",
+    "whatsapp_inject_inbound",
+    "whatsapp_list_threads",
+    "whatsapp_register_webhook",
+    "whatsapp_send",
+    "world_advance_time",
+    "world_get_scenario_summary",
+    "world_get_scenarios",
+    "world_get_timeline",
+    "world_inject_event",
+    "world_next_event",
+    "world_start_scenario"
+  ],
+  "tools": [
+    {
+      "name": "evaluator_generate_team_report",
+      "description": "Generate a combined team evidence report for judges/leaderboard preparation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "repoUrl": {
+            "type": "string"
+          },
+          "websiteUrl": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "evaluator_get_evidence_summary",
+      "description": "Collect per-team simulation evidence across world, marketing, Square/POS, kitchen, channel state, and mcp_audit_log.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "evaluator_score_channel_response",
+      "description": "Score WhatsApp, Instagram, and Google Business response evidence.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "evaluator_score_marketing_loop",
+      "description": "Score the $500 -> $5,000 marketing loop using simulator evidence.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "evaluator_score_pos_kitchen_flow",
+      "description": "Score Square/POS order flow and kitchen/production handoff evidence.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "evaluator_score_world_scenario",
+      "description": "Score deterministic world/scenario execution and MCP audit behavior.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "gb_get_metrics",
+      "description": "Fetch sandbox metrics: views, calls, direction requests for the period.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string",
+            "description": "last_7_days | last_30_days"
+          }
+        }
+      }
+    },
+    {
+      "name": "gb_list_reviews",
+      "description": "Recent reviews on the Happy Cake US Google Business profile.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "gb_list_simulated_actions",
+      "description": "Inspect everything this team has recorded in the GMB simulation namespace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "gb_simulate_post",
+      "description": "Record a proposed Google Business post. Simulated. Used by the team's marketing agent for daily/weekly community updates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "callToAction": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "photoUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      }
+    },
+    {
+      "name": "gb_simulate_reply",
+      "description": "Record a proposed reply to a review. Simulated — does NOT actually post to Google. The evaluator checks both the existence and the wording of the reply.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "string"
+          },
+          "reply": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reviewId",
+          "reply"
+        ]
+      }
+    },
+    {
+      "name": "instagram_approve_post",
+      "description": "Owner-side helper used by the team's Telegram bot when the owner taps \"Approve\".",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scheduledPostId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scheduledPostId"
+        ]
+      }
+    },
+    {
+      "name": "instagram_inject_dm",
+      "description": "Test-only: inject a simulated inbound DM from a fake follower.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "description": "IG handle of simulated follower."
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "threadId",
+          "from",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "instagram_list_dm_threads",
+      "description": "List the team's recent Instagram DM conversations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "instagram_publish_post",
+      "description": "Publish an approved post from the queue. Reject with an error if the post hasn't been approved by the owner yet.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scheduledPostId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scheduledPostId"
+        ]
+      }
+    },
+    {
+      "name": "instagram_register_webhook",
+      "description": "Register a public URL where this team wants to receive inbound Instagram DM and comment events. The MCP server forwards simulated events from the shared dev account to that URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A public HTTPS URL on your ngrok or Cloudflare Tunnel."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "instagram_reply_to_comment",
+      "description": "Reply to a comment under an Instagram post.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "commentId",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "instagram_schedule_post",
+      "description": "Queue a post for owner approval. Returns a scheduledPostId. Posts are NEVER published until instagram_publish_post is called by the agent after owner approval.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "scheduledFor": {
+            "type": "string",
+            "description": "ISO 8601 timestamp."
+          }
+        },
+        "required": [
+          "imageUrl",
+          "caption"
+        ]
+      }
+    },
+    {
+      "name": "instagram_send_dm",
+      "description": "Send a direct message to an Instagram user thread.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "threadId",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "kitchen_accept_ticket",
+      "description": "Accept a queued kitchen ticket if capacity and timing are feasible.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticketId"
+        ]
+      }
+    },
+    {
+      "name": "kitchen_create_ticket",
+      "description": "Create a simulated kitchen production ticket from website, WhatsApp, Instagram, or POS order intent.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "productId",
+                "quantity"
+              ]
+            }
+          },
+          "requestedPickupAt": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "customerName",
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "kitchen_get_capacity",
+      "description": "Return simulated kitchen capacity, lead time defaults, and current load summary.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "kitchen_get_menu_constraints",
+      "description": "Return menu-level preparation, leadTime, capacity, and custom-work constraints.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "kitchen_get_production_summary",
+      "description": "Return production summary for evaluator: ticket counts, capacity use, rejections, and readiness.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "kitchen_list_tickets",
+      "description": "List simulated kitchen tickets for this team, optionally filtered by status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "kitchen_mark_ready",
+      "description": "Mark an accepted kitchen ticket ready for pickup or handoff.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "string"
+          },
+          "pickupNote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticketId"
+        ]
+      }
+    },
+    {
+      "name": "kitchen_reject_ticket",
+      "description": "Reject a kitchen ticket with a reason when inventory, lead time, or capacity makes it unsafe to promise.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticketId",
+          "reason"
+        ]
+      }
+    },
+    {
+      "name": "marketing_adjust_campaign",
+      "description": "Record an agent adjustment after reading campaign metrics.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          },
+          "adjustment": {
+            "type": "string"
+          },
+          "expectedImpact": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaignId",
+          "adjustment"
+        ]
+      }
+    },
+    {
+      "name": "marketing_create_campaign",
+      "description": "Create a simulated campaign plan. Records the plan in per-team marketing state.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string",
+            "description": "instagram | google_local | whatsapp | website | mixed"
+          },
+          "objective": {
+            "type": "string"
+          },
+          "budgetUsd": {
+            "type": "number"
+          },
+          "targetAudience": {
+            "type": "string"
+          },
+          "offer": {
+            "type": "string"
+          },
+          "landingPath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "channel",
+          "objective",
+          "budgetUsd",
+          "targetAudience",
+          "offer"
+        ]
+      }
+    },
+    {
+      "name": "marketing_generate_leads",
+      "description": "Generate simulated leads from campaign metrics so teams can route them to website, WhatsApp, Instagram, or owner approval.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaignId"
+        ]
+      }
+    },
+    {
+      "name": "marketing_get_budget",
+      "description": "Return the Happy Cake monthly marketing constraint and target: make $500/month perform like $5,000.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "marketing_get_campaign_metrics",
+      "description": "Read simulated campaign metrics for this team.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "marketing_get_margin_by_product",
+      "description": "Return seeded product pricing and estimated margin data for budget allocation decisions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "marketing_get_sales_history",
+      "description": "Return anonymized monthly sales history for campaign planning.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "marketing_launch_simulated_campaign",
+      "description": "Launch a created campaign inside the simulator and record impressions/clicks/leads/orders estimates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          },
+          "approvalNote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaignId"
+        ]
+      }
+    },
+    {
+      "name": "marketing_report_to_owner",
+      "description": "Summarize campaign plan, simulated results, lead routing, and next actions for the owner.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "marketing_route_lead",
+      "description": "Record how an agent routed a marketing lead into the sales/customer channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "leadId": {
+            "type": "string"
+          },
+          "routeTo": {
+            "type": "string",
+            "description": "website | whatsapp | instagram | owner_approval"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "leadId",
+          "routeTo",
+          "reason"
+        ]
+      }
+    },
+    {
+      "name": "square_create_order",
+      "description": "Create a simulator POS order from website, whatsapp, instagram, walk-in, or agent source. Use kitchen_create_ticket after this for production handoff.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "variationId": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "number"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "variationId",
+                "quantity"
+              ]
+            }
+          },
+          "source": {
+            "type": "string",
+            "description": "website | whatsapp | instagram | walk-in | agent"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "customerNote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "square_get_inventory",
+      "description": "Get simulator inventory for catalog variation IDs. Does not require Square env credentials.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "variationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "variationIds"
+        ]
+      }
+    },
+    {
+      "name": "square_get_pos_summary",
+      "description": "Return per-team simulator POS summary for evaluator: orders, revenue, channel mix, and kitchen handoff readiness.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "square_list_catalog",
+      "description": "List the simulator-first Happy Cake POS catalog. Works without Square credentials; real Square adapter is server-side opt-in later.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "name": "square_recent_orders",
+      "description": "Fetch recent simulator POS orders for this team token.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sinceISO": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "name": "square_recent_sales_csv",
+      "description": "Returns canonical seeded 6-month sales CSV for marketing-budget reasoning. Read-only and simulator-safe.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "square_update_order_status",
+      "description": "Update simulated POS order status after approval, kitchen handoff, ready, completion, or cancellation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "status"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_inject_inbound",
+      "description": "Test-only: inject a simulated inbound WhatsApp message from a fake customer. Used by the evaluator and by teams to dry-run their own agents. Does NOT actually message anyone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "E.164 phone number of the simulated customer."
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_list_threads",
+      "description": "List recent WhatsApp conversations the team has handled.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "whatsapp_register_webhook",
+      "description": "Register a public URL where this team wants to receive inbound WhatsApp message events. The MCP server will forward incoming events from the shared sandbox to that URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A public HTTPS URL on your ngrok or Cloudflare Tunnel."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "whatsapp_send",
+      "description": "Send a text message to a customer on WhatsApp. The customer must be in the team's whitelisted simulated customers list during the hackathon.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "E.164 phone number, e.g. +12815551001."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message body. English only."
+          }
+        },
+        "required": [
+          "to",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "world_advance_time",
+      "description": "Advance the active scenario clock by simulator minutes and return due events preview.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "minutes": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "minutes"
+        ]
+      }
+    },
+    {
+      "name": "world_get_scenario_summary",
+      "description": "Return scenario progress summary: delivered events, channel mix, current minute, and remaining events.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "world_get_scenarios",
+      "description": "List deterministic, time-compressed business scenarios available for team/evaluator runs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "world_get_timeline",
+      "description": "Read the per-team world timeline for debugging and evaluator scoring.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "world_inject_event",
+      "description": "Inject a custom evaluator/test event into this team timeline without touching real channels.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "payload": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "channel",
+          "type",
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "world_next_event",
+      "description": "Deliver the next deterministic event in the active scenario timeline.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "world_start_scenario",
+      "description": "Start a deterministic time-compressed scenario for this team token and reset its world timeline.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scenarioId": {
+            "type": "string"
+          },
+          "seed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "scenarioId"
+        ]
+      }
+    }
+  ]
+}

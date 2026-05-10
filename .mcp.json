@@ -1,0 +1,12 @@
+{
+  "_comment": "Project-scoped MCP. Token is read from .env via env-var interpolation. Never put a literal sbc_team_* token here. The shell that launches `claude` must have HAPPYCAKE_TEAM_TOKEN exported (verify.sh and bot wrappers source .env).",
+  "mcpServers": {
+    "happycake": {
+      "type": "http",
+      "url": "https://www.steppebusinessclub.com/api/mcp",
+      "headers": {
+        "X-Team-Token": "${HAPPYCAKE_TEAM_TOKEN}"
+      }
+    }
+  }
+}

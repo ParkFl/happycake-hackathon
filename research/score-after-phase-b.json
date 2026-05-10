@@ -1,0 +1,31 @@
+{
+  "score": 80,
+  "dims": [
+    {
+      "d": "marketing loop",
+      "s": 100,
+      "gaps": [
+        "No campaign created"
+      ]
+    },
+    {
+      "d": "POS + kitchen handoff",
+      "s": 100,
+      "gaps": []
+    },
+    {
+      "d": "channel response",
+      "s": 20,
+      "gaps": [
+        "No WhatsApp response evidence",
+        "No Instagram handling evidence",
+        "No Google Business review reply evidence"
+      ]
+    },
+    {
+      "d": "world scenario execution",
+      "s": 100,
+      "gaps": []
+    }
+  ]
+}

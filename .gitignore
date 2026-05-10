@@ -1,0 +1,38 @@
+# --- secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+# Token / credentials dumps from organizers — NEVER commit even though they live in /docs.
+docs/research/MCP_token_info.txt
+docs/research/token_ready_and_info.txt
+
+# --- runtime / logs ---
+logs/
+research/raw/
+*.log
+
+# --- node ---
+node_modules/
+.next/
+.vercel/
+dist/
+build/
+*.tsbuildinfo
+
+# --- python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# --- editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- claude local-only ---
+.claude/local.*
+.claude/sessions/

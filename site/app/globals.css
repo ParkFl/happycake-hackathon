@@ -1,0 +1,119 @@
+@import "../styles/tokens.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: rgb(var(--text-primary));
+    background: rgb(var(--cream-50));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: rgb(var(--happy-blue-900));
+    letter-spacing: -0.005em;
+  }
+
+  h1 { font-size: clamp(2.25rem, 4vw + 1rem, 3rem); line-height: 1.05; }
+  h2 { font-size: clamp(1.5rem, 2vw + 1rem, 2rem); line-height: 1.15; }
+  h3 { font-size: 1.375rem; line-height: 1.25; }
+
+  p, li { line-height: 1.6; }
+
+  a {
+    color: rgb(var(--happy-blue-700));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  a:hover { color: rgb(var(--happy-blue-900)); }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--happy-blue-500));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: rgb(var(--happy-blue-200));
+    color: rgb(var(--happy-blue-900));
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md
+           bg-happy-blue-700 text-cream-50 font-medium
+           px-5 py-3 min-h-[44px] no-underline select-none
+           transition-colors
+           hover:bg-happy-blue-900 hover:text-cream-50
+           active:bg-happy-blue-900 active:text-cream-50
+           focus-visible:outline-2 focus-visible:outline-happy-blue-500 focus-visible:outline-offset-2
+           disabled:opacity-50 disabled:hover:bg-happy-blue-700;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md
+           bg-cream-50 text-happy-blue-700 font-medium
+           px-5 py-3 min-h-[44px] no-underline select-none
+           border border-happy-blue-700/40
+           transition-colors
+           hover:bg-happy-blue-200/40 hover:text-happy-blue-900 hover:border-happy-blue-700
+           active:bg-happy-blue-200/60 active:text-happy-blue-900
+           focus-visible:outline-2 focus-visible:outline-happy-blue-500 focus-visible:outline-offset-2;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .surface {
+    @apply bg-cream-100 border border-happy-blue-900/10 rounded-md;
+  }
+  .skip-link {
+    @apply absolute left-0 top-0 z-50 -translate-y-full
+           bg-happy-blue-900 text-cream-50 px-4 py-3 min-h-[44px]
+           inline-flex items-center
+           focus:translate-y-0;
+  }
+
+  /* Brandbook §4.3 — cake-name labels (used on chips, eyebrow lines, micro contexts).
+     NOT for product headings — those keep Cormorant via h2/h3. */
+  .cake-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.1em;
+  }
+
+  /* Brandbook §4.5 — "diamond eyebrow" separator. e.g. ◆ HappyCake · Sugar Land */
+  .eyebrow {
+    @apply inline-flex items-center gap-1.5 font-medium uppercase tracking-[0.18em];
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: rgb(var(--happy-blue-700));
+  }
+  .eyebrow::before {
+    content: "◆";
+    font-size: 0.8em;
+    color: rgb(var(--accent-coral));
+  }
+
+  /* Brandbook §4.5 — "polka-dot awning" pattern. Used as section divider on cream surfaces.
+     Cream dots on Happy Blue, OR Happy Blue dots on cream — pick via `.polka--inverse`. */
+  .polka-divider {
+    height: 18px;
+    background-image: radial-gradient(rgb(var(--happy-blue-700) / 0.18) 2px, transparent 2.5px);
+    background-size: 14px 14px;
+    background-position: 0 50%;
+  }
+  .polka-divider--inverse {
+    background-image: radial-gradient(rgb(var(--cream-100) / 0.85) 2px, transparent 2.5px);
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "evidence_summary": {
+    "policy": "No real credentials. Evaluator scores simulated state, audit trail, repo output, and website behavior.",
+    "websiteArtifact": "happycake.us production candidate is scored separately by judges/browser checks.",
+    "counts": {
+      "worldEvents": 13,
+      "marketingCampaigns": 0,
+      "marketingLeads": 6,
+      "squareOrders": 6,
+      "kitchenTickets": 4,
+      "whatsappInbound": 1,
+      "whatsappOutbound": 0,
+      "instagramActions": 0,
+      "gbusinessReviews": 0,
+      "gbusinessReplies": 0,
+      "auditCalls": 200
+    }
+  },
+  "channel_response_score": {
+    "dimension": "channel response",
+    "score": 10,
+    "maxScore": 100,
+    "evidence": [
+      "1 WhatsApp inbound event(s)",
+      "0 WhatsApp response(s)",
+      "0 Instagram action(s)",
+      "0 Google review(s), 0 proposed reply/replies"
+    ],
+    "gaps": [
+      "No WhatsApp response evidence",
+      "No Instagram handling evidence",
+      "No Google Business review reply evidence"
+    ]
+  }
+}

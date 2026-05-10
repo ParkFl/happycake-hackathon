@@ -1,0 +1,76 @@
+{
+  "policy": "No real credentials. No writes to real business/social accounts. Evaluator scores simulated state and repo/website evidence.",
+  "websiteArtifact": "happycake.us production candidate URL to be checked by judges",
+  "repoUrl": "repo URL not provided",
+  "notes": null,
+  "score": 51,
+  "maxScore": 100,
+  "dimensions": [
+    {
+      "dimension": "marketing loop",
+      "score": 100,
+      "maxScore": 100,
+      "evidence": [
+        "0 campaign(s) created",
+        "6 simulated lead(s) generated/routed",
+        "3 owner report(s) recorded",
+        "3 POS-style order(s) available for attribution"
+      ],
+      "gaps": [
+        "No campaign created"
+      ]
+    },
+    {
+      "dimension": "POS + kitchen handoff",
+      "score": 65,
+      "maxScore": 100,
+      "evidence": [
+        "3 Square/POS simulator order(s)",
+        "1 kitchen ticket(s)",
+        "0 accepted, 0 ready, 0 rejected/escalated"
+      ],
+      "gaps": [
+        "No capacity-aware accept/reject decision",
+        "No ready-for-pickup completion evidence"
+      ]
+    },
+    {
+      "dimension": "channel response",
+      "score": 0,
+      "maxScore": 100,
+      "evidence": [
+        "0 WhatsApp inbound event(s)",
+        "0 WhatsApp response(s)",
+        "0 Instagram action(s)",
+        "0 Google review(s), 0 proposed reply/replies"
+      ],
+      "gaps": [
+        "No channel events processed",
+        "No WhatsApp response evidence",
+        "No Instagram handling evidence",
+        "No Google Business review reply evidence"
+      ]
+    },
+    {
+      "dimension": "world scenario execution",
+      "score": 40,
+      "maxScore": 100,
+      "evidence": [
+        "No active scenario run",
+        "0 event(s) in timeline",
+        "0 event(s) delivered",
+        "88 recent MCP call(s) in mcp_audit_log"
+      ],
+      "gaps": [
+        "No world_start_scenario evidence",
+        "No world_next_event/world_advance_time delivery evidence"
+      ]
+    }
+  ],
+  "nextJudgeChecks": [
+    "Review GitHub repo architecture and .env.example for secret hygiene.",
+    "Browse the website as a happycake.us production artifact: UX, conversion, order intent, deployability.",
+    "Replay world scenario and compare timeline/audit evidence with README claims.",
+    "Check owner approval, escalation, capacity promises, and post-hackathon real-adapter path."
+  ]
+}

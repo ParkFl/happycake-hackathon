@@ -1,0 +1,744 @@
+{
+  "runs": [
+    {
+      "tool": "whatsapp_register_webhook",
+      "label": "WA register webhook",
+      "request": {
+        "url": "https://placeholder-happycake.example.com/whatsapp"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Webhook registered. We will forward inbound WhatsApp events from the team's simulated phone to https://placeholder-happycake.example.com/whatsapp."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 1,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 1,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "whatsapp_send",
+      "label": "WA send to scenario number",
+      "request": {
+        "to": "+12815559001",
+        "message": "Probe outbound to scenario number"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Message recorded for +12815559001. 33 chars. Real WhatsApp delivery activates once Meta credentials are wired."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "whatsapp_send",
+      "label": "WA send to existing",
+      "request": {
+        "to": "+18325550199",
+        "message": "Probe outbound to existing thread"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Message recorded for +18325550199. 33 chars. Real WhatsApp delivery activates once Meta credentials are wired."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "whatsapp_list_threads",
+      "label": "WA list threads (read)",
+      "request": {},
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"inbound\": [\n    {\n      \"ts\": \"2026-05-09T21:59:41.610Z\",\n      \"from\": \"+18325550199\",\n      \"message\": \"Hi! It is my mom 60th birthday on Saturday. What do you have for 8 people?\",\n      \"direction\": \"inbound\"\n    },\n    {\n      \"ts\": \"2026-05-10T00:17:45.277Z\",\n      \"from\": \"+12815559001\",\n      \"message\": \"Probe inbound\",\n      \"direction\": \"inbound\"\n    }\n  ],\n  \"outbound\": [],\n  \"simulated\": true\n}"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_register_webhook",
+      "label": "IG register webhook",
+      "request": {
+        "url": "https://placeholder-happycake.example.com/ig"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Webhook registered. Inbound IG events will be forwarded to https://placeholder-happycake.example.com/ig."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_inject_dm",
+      "label": "IG inject DM",
+      "request": {
+        "threadId": "ig_probe_001",
+        "from": "@probe_user",
+        "message": "Probe IG inbound"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Injected inbound DM from @probe_user. webhook forward failed: fetch failed."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_send_dm",
+      "label": "IG send DM",
+      "request": {
+        "threadId": "ig_probe_001",
+        "message": "Probe IG outbound"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] DM recorded for thread ig_probe_001."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_reply_to_comment",
+      "label": "IG reply to comment",
+      "request": {
+        "commentId": "cm_probe_001",
+        "message": "Probe IG comment reply"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Reply queued for comment cm_probe_001."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_schedule_post",
+      "label": "IG schedule post",
+      "request": {
+        "imageUrl": "https://www.steppebusinessclub.com/hackathon-assets/happy-cake/social/happy-cake-social-01.webp",
+        "caption": "Probe IG post"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"scheduledPostId\": \"post_1778372276022_a34jwu\",\n  \"status\": \"pending_approval\"\n}"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "instagram_list_dm_threads",
+      "label": "IG list DM threads (read)",
+      "request": {},
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"inbound\": [\n    {\n      \"ts\": \"2026-05-09T22:00:33.135Z\",\n      \"from\": \"@maya_houston\",\n      \"message\": \"Do you have anything for an office of 12 people for Friday morning?\",\n      \"threadId\": \"ig_thread_smoke_001\"\n    },\n    {\n      \"ts\": \"2026-05-10T00:17:51.944Z\",\n      \"from\": \"@probe_user\",\n      \"message\": \"Probe IG inbound\",\n      \"threadId\": \"ig_probe_001\"\n    }\n  ],\n  \"outbound\": [\n    {\n      \"ts\": \"2026-05-09T22:00:57.622Z\",\n      \"message\": \"Hi Maya — yes, our Office dessert box is made for this. $120, assorted desserts, comfortable for a 12-person office. Friday morning pickup is open; want me to hold a slot?\\nOrder on the site at happycake.us or send a message on WhatsApp.\\n— Saule\",\n      \"threadId\": \"ig_thread_smoke_001\"\n    },\n    {\n      \"ts\": \"2026-05-09T22:07:14.827Z\",\n      \"message\": \"Hi! 3 Office dessert boxes for Monday � yes we can. $360 total. Want me to hold a slot? Need pickup time and a phone number for confirmations.\\nOrder on the site at happycake.us or send a message on WhatsApp.\\n� Saule\",\n      \"threadId\": \"@officeadmin\"\n    },\n    {\n      \"ts\": \"2026-05-09T22:18:02.605Z\",\n      \"message\": \"Hi! Yes the Office dessert box is $120 and we have Friday slots open. — Saule\",\n      \"threadId\": \"ig_smoke_a\"\n    },\n    {\n      \"ts\": \"2026-05-09T22:18:05.743Z\",\n      \"message\": \"Welcome back — happy to hold a whole cake \\\"Honey\\\" for Saturday. — Saule\",\n      \"threadId\": \"ig_smoke_b\"\n    },\n    {\n      \"ts\": \"2026-05-10T00:17:53.226Z\",\n      \"message\": \"Probe IG outbound\",\n      \"threadId\": \"ig_probe_001\"\n    }\n  ],\n  \"simulated\": true\n}"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_list_reviews",
+      "label": "GB list reviews (read)",
+      "request": {},
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[\n  {\n    \"id\": \"rev_001\",\n    \"rating\": 5,\n    \"author\": \"M. R.\",\n    \"text\": \"Best honey cake in the area. Came for a birthday, leaving as a regular.\",\n    \"createdAt\": \"2026-04-21T14:30:00Z\"\n  },\n  {\n    \"id\": \"rev_002\",\n    \"rating\": 4,\n    \"author\": \"J. S.\",\n    \"text\": \"Lovely pistachio roll. Wish you delivered.\",\n    \"createdAt\": \"2026-04-19T09:12:00Z\"\n  },\n  {\n    \"id\": \"rev_003\",\n    \"rating\": 2,\n    \"author\": \"A. P.\",\n    \"text\": \"Cake was fine but I waited 25 minutes for one slice. Front of house could be faster.\",\n    \"createdAt\": \"2026-04-15T17:45:00Z\"\n  },\n  {\n    \"id\": \"rev_004\",\n    \"rating\": 5,\n    \"author\": \"D. N.\",\n    \"text\": \"We've been ordering from HappyCake for our office birthdays for months. Never disappointed.\",\n    \"createdAt\": \"2026-04-12T11:00:00Z\"\n  }\n]"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_simulate_reply",
+      "label": "GB simulate reply rev_001",
+      "request": {
+        "reviewId": "rev_001",
+        "reply": "Thank you M. R. — probe reply 1. — Saule, HappyCake team"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Reply for review rev_001 (rating 5) recorded."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_simulate_reply",
+      "label": "GB simulate reply rev_002",
+      "request": {
+        "reviewId": "rev_002",
+        "reply": "Thank you J. S. — probe reply 2. — Saule, HappyCake team"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Reply for review rev_002 (rating 4) recorded."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_simulate_reply",
+      "label": "GB simulate reply rev_004",
+      "request": {
+        "reviewId": "rev_004",
+        "reply": "Thank you D. N. — probe reply 3. — Saule, HappyCake team"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "[simulated] Reply for review rev_004 (rating 5) recorded."
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_simulate_post",
+      "label": "GB simulate community post",
+      "request": {
+        "content": "Saturday morning, fresh out of the oven."
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"postId\": \"gbpost_1778372284256\",\n  \"status\": \"recorded\"\n}"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    },
+    {
+      "tool": "gb_get_metrics",
+      "label": "GB get metrics (read)",
+      "request": {
+        "period": "last_30_days"
+      },
+      "response_raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"simulated\": true,\n  \"period\": \"last_30_days\",\n  \"profileViews\": 1842,\n  \"searchViews\": 1340,\n  \"mapViews\": 502,\n  \"directionsRequests\": 87,\n  \"callsClicks\": 41,\n  \"websiteClicks\": 96\n}"
+            }
+          ]
+        }
+      },
+      "counters_before": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counters_after": {
+        "worldEvents": 13,
+        "marketingCampaigns": 0,
+        "marketingLeads": 6,
+        "squareOrders": 8,
+        "kitchenTickets": 6,
+        "whatsappInbound": 2,
+        "whatsappOutbound": 0,
+        "instagramActions": 0,
+        "gbusinessReviews": 0,
+        "gbusinessReplies": 0,
+        "auditCalls": 200
+      },
+      "counter_deltas": {}
+    }
+  ]
+}

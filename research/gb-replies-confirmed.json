@@ -1,0 +1,41 @@
+{
+  "replies": [
+    {
+      "ts": "2026-05-09T22:02:02.703Z",
+      "reply": "Apologies, A. P. — a 25-minute wait for a single slice isn't the experience we want for anyone, and that one's on us. We've shared the note with the front-of-house team and are tightening pacing on counter orders this week. Next time you're in, ask for Saule and we'll make sure you're looked after quickly.\n\nThank you for the honest feedback — it's how HappyCake gets better.\n\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule, HappyCake team",
+      "reviewId": "rev_003"
+    },
+    {
+      "ts": "2026-05-09T22:14:35.909Z",
+      "reply": "Hi A. — 25 minutes for a slice is too long, and I'm sorry. That's on us, not on you. We're staffing the front faster on our peak windows so a slice goes out in under 5. If you'd give us another shot, message hello@happycake.us and I'll have one ready when you walk in.\n\n— Saule, HappyCake",
+      "reviewId": "rev_003"
+    },
+    {
+      "ts": "2026-05-09T22:17:06.709Z",
+      "reply": "Thank you, M. — that means a lot. Glad cake \"Honey\" landed on a birthday and that you'll be back; we'll have a fresh bake waiting whenever you stop in.\n\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule, HappyCake team",
+      "reviewId": "rev_001"
+    },
+    {
+      "ts": "2026-05-09T22:17:07.794Z",
+      "reply": "Thank you, J. — glad cake \"Pistachio Roll\" landed well. Delivery isn't something we run in-house yet, but we've heard the ask and passed it to Askhat. Pickup in Sugar Land is the way for now.\n\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule, HappyCake team",
+      "reviewId": "rev_002"
+    },
+    {
+      "ts": "2026-05-09T22:17:09.464Z",
+      "reply": "A., I'm sorry — 25 minutes for a slice is on us, not on you. We've shared this with the front-of-house team, and we'd like to make it right: next time you're in, send a message ahead and your slice will be packed and waiting at the counter.\n\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule, HappyCake team",
+      "reviewId": "rev_003"
+    },
+    {
+      "ts": "2026-05-09T22:17:10.087Z",
+      "reply": "Thank you, D. — months of office birthdays in your hands is the best kind of regular. We'll keep every batch tight and the bench fresh for the next round.\n\nOrder on the site at happycake.us or send a message on WhatsApp.\n— Saule, HappyCake team",
+      "reviewId": "rev_004"
+    }
+  ],
+  "posts": [],
+  "thisRunCoverage": {
+    "rev_001": "REPLIED",
+    "rev_002": "REPLIED",
+    "rev_003": "REPLIED",
+    "rev_004": "REPLIED"
+  }
+}

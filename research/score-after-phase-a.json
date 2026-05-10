@@ -1,0 +1,21 @@
+{
+  "score": 78,
+  "dims": [
+    {
+      "d": "marketing loop",
+      "s": 100
+    },
+    {
+      "d": "POS + kitchen handoff",
+      "s": 100
+    },
+    {
+      "d": "channel response",
+      "s": 10
+    },
+    {
+      "d": "world scenario execution",
+      "s": 100
+    }
+  ]
+}

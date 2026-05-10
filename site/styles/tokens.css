@@ -1,0 +1,24 @@
+/* RGB triplets so Tailwind opacity modifiers (e.g. /30) work via <alpha-value>. */
+:root {
+  --happy-blue-900: 14 42 60;     /* #0E2A3C */
+  --happy-blue-700: 27 72 104;    /* #1B4868 */
+  --happy-blue-500: 59 123 168;   /* #3B7BA8 */
+  --happy-blue-200: 191 216 232;  /* #BFD8E8 */
+  --cream-50:       251 246 232;  /* #FBF6E8 */
+  --cream-100:      244 236 211;  /* #F4ECD3 */
+  --cream-200:      233 219 180;  /* #E9DBB4 */
+  --accent-coral:   224 128 102;  /* #E08066 */
+  --accent-green:   110 157 116;  /* #6E9D74 */
+  --text-primary:   26 24 22;     /* #1A1816 */
+  --text-on-blue:   251 246 232;
+
+  /* The "-loaded" variant comes from next/font in layout.tsx; if absent (e.g. legacy
+     SSR fragments without provider), we still fall back to a system serif/sans. */
+  --font-display: var(--font-display-loaded), "Cormorant Garamond", Georgia, serif;
+  --font-body:    var(--font-body-loaded), "Inter", -apple-system, system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --max-page: 1200px;
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "launch-day-revenue-engine",
+    "name": "Launch day revenue engine",
+    "description": "A deterministic, time-compressed day of inbound demand, marketing pressure, POS orders, and kitchen constraints.",
+    "seed": 9100510,
+    "durationMinutes": 480,
+    "timeCompression": "1 simulator hour = 10 real minutes"
+  },
+  {
+    "id": "weekend-capacity-crunch",
+    "name": "Weekend capacity crunch",
+    "description": "A compressed Saturday with strong demand, custom cake constraints, complaints, and capacity tradeoffs.",
+    "seed": 9100520,
+    "durationMinutes": 360,
+    "timeCompression": "1 simulator hour = 8 real minutes"
+  }
+]
