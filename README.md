@@ -23,32 +23,54 @@
 
 ## Quickstart (fresh clone)
 
+> **Full step-by-step for judges with verification checkpoints:** [`docs/REPRODUCE.md`](docs/REPRODUCE.md). The TL;DR below assumes you've read it.
+
 ```bash
-git clone <this-repo> happycake-us
-cd happycake-us
+git clone https://github.com/ParkFl/happycake-hackathon.git
+cd happycake-hackathon
 cp .env.example .env
-# Open .env, fill HAPPYCAKE_TEAM_TOKEN (sandbox), TELEGRAM_BOT_TOKEN_OWNER, TELEGRAM_OWNER_CHAT_ID,
-# NGROK_AUTHTOKEN (or Cloudflare Tunnel equivalent).
+# Open .env. Fill the 4 REQUIRED vars (every other line has a default):
+#   HAPPYCAKE_TEAM_TOKEN     — get from organizers' Discord (sbc_team_<32hex>)
+#   TELEGRAM_BOT_TOKEN_OWNER — @BotFather → /newbot
+#   TELEGRAM_OWNER_CHAT_ID   — @userinfobot → /start (numeric id)
+#   NGROK_AUTHTOKEN          — dashboard.ngrok.com/get-started/your-authtoken
 make install
-bash scripts/verify.sh   # 7-step environment check (claude CLI, .env, MCP reachable, hooks)
+bash scripts/verify.sh   # 7-step health check (claude CLI, .env, MCP reachable, hooks)
 make dev                 # site on :3000, owner_bot on :8000 (Telegram + escalation HTTP)
 ```
 
-In a separate terminal, expose port 8000 publicly so site chat + escalations reach the bot:
+In a separate terminal, expose port 8000 publicly so site chat + WhatsApp/IG webhooks reach the bot:
 
 ```bash
 ngrok http 8000
-# Take the printed https URL → put it in .env as PUBLIC_WEBHOOK_BASE
-# AND set the same URL on Vercel as LOCAL_AGENT_URL (env var) so production /api/chat proxies here.
+# Copy the printed https URL.
+# 1. Put it in .env as LOCAL_AGENT_URL=https://<id>.ngrok-free.app
+# 2. Set the SAME URL on Vercel as LOCAL_AGENT_URL so production /api/chat proxies here.
+bash scripts/deploy.sh    # one-shot: pushes HAPPYCAKE_TEAM_TOKEN + LOCAL_AGENT_URL to Vercel + deploys.
 ```
 
-The site already runs on Vercel. To redeploy after a code change:
+### Smoke the WhatsApp / Instagram webhooks (judges)
+
+Once `ngrok http 8000` is running and you've copied the URL:
 
 ```bash
-bash scripts/deploy.sh
+# WhatsApp inbound — owner gets a Telegram alert + agent reply via mcp_client.whatsapp_send
+curl -X POST https://<your-ngrok-id>.ngrok-free.app/webhooks/whatsapp \
+  -H 'Content-Type: application/json' \
+  -d '{"from":"+18325559999","customer_name":"Maya","message":"Whole honey cake price please?"}'
+
+# Instagram DM inbound — same flow via mcp_client.instagram_send_dm
+curl -X POST https://<your-ngrok-id>.ngrok-free.app/webhooks/instagram \
+  -H 'Content-Type: application/json' \
+  -d '{"threadId":"th_001","from":"happy_customer_42","message":"Saw your honey cake on Insta"}'
+
+# Site chat (proxied through Vercel; if no ngrok needed, hit the prod URL):
+curl -X POST https://happycake-us.vercel.app/api/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"channel":"site_chat","session_id":"smoke-1","latest_message":"What is in stock today?","transcript":[]}'
 ```
 
-The deploy script confirms login, sets `HAPPYCAKE_TEAM_TOKEN` + `LOCAL_AGENT_URL` in Vercel Production scope, and triggers a `vercel deploy --prod`.
+Each call returns instantly with `{"ok":true,...}`; the agent runs in a background thread (~30-60s), then **owner gets a Telegram alert with 🙋 Take over button**. Tap it → owner's Telegram messages flow back to the customer with a `👤 Team` badge in the site chat / via `mcp_client.whatsapp_send`. See [`docs/REPRODUCE.md` §4-5](docs/REPRODUCE.md) for the full webhook contract.
 
 ---
 

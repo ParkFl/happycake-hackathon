@@ -46,7 +46,7 @@ Inline buttons (Approve / Reject) work out of the box on bots created in 2024+ â
 After steps 1â€“2 your `.env` should contain at least:
 
 ```bash
-HAPPYCAKE_TEAM_TOKEN=sbc_team_31b2e37766529ccdd239d3c09ce928a2   # your real token
+HAPPYCAKE_TEAM_TOKEN=sbc_team_<your-32-hex-from-Discord>         # request in organizers' Discord
 HAPPYCAKE_MCP_URL=https://www.steppebusinessclub.com/api/mcp
 
 PUBLIC_WEBHOOK_BASE=https://abcd1234.ngrok-free.app             # set after step 5
