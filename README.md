@@ -1,6 +1,7 @@
 # HappyCake — AI sales & operations system
 
-> **Live production candidate:** [https://happycake-us.vercel.app](https://happycake-us.vercel.app)
+> **Live site:** https://happycake-us.vercel.app
+> **Public repo:** https://github.com/ParkFl/happycake-hackathon
 >
 > A 24-hour hackathon build for **HappyCake** (Sugar Land, TX). Turns a placeholder website, a single WhatsApp line, an Instagram window-display, and a $500/month marketing budget into a closed, AI-operated sales loop — with the owner driving everything from Telegram. Site is live; chat works in production; orders flow through the real MCP sandbox; owner is alerted on Telegram for every approval.
 
@@ -63,6 +64,29 @@ bash scripts/kitchen_smoke.sh    # full order → ticket → accept → ready �
 bash scripts/world_smoke.sh      # start a public scenario, drive 6+ events, react via /sales
 bash scripts/marketing_smoke.sh  # full marketing chain create → launch → leads → route → adjust → report
 ```
+
+---
+
+## Telegram bots — the owner's console
+
+The operator has **one Telegram bot** that mirrors the entire business in their pocket. 11 slash-commands + persistent reply-keyboard:
+
+| Command | What it does |
+|---|---|
+| `/today` | Live POS + kitchen snapshot (orders, revenue, tickets, capacity) |
+| `/approvals` | Pending cards with emoji-headed summaries + Approve/Edit/Reject + 🙋 Take-over for site_chat threads |
+| `/escalations` | Open complaints / over-capacity / handoffs filtered to the urgent ones |
+| `/reviews` | Pulls Google reviews + drafts on-brand replies via claude → owner one-tap approves |
+| `/marketing` | Running campaign totals; **`/marketing new <topic>`** drafts a full campaign (channel, audience, offer, CDN-image) for one-tap launch |
+| `/live` | All currently-live owner-takeover threads + recent activity across WhatsApp, Instagram, site_chat |
+| `/focus channel:id` | Pin reply focus to a specific thread |
+| `/handback` | Hand the live chat back to the bot + auto-notify customer |
+| `/cancel` | Drop pending Edit / Live state — unstick yourself |
+| `/menu` `/help` | Show keyboard / command list |
+
+When a customer presses **"Hand off to team"** in the site chat: agent asks for phone first (so contact survives a chat drop), then escalates → owner gets a rich Telegram card with last few turns, agent's reply, and a 🙋 Take-over button. One tap and the chat header on the customer's browser turns coral with **"👤 You're chatting with the team"**; every owner message back appears with a 👤 Team badge. `/handback` returns control to the bot with a polite "the assistant is back" notice. On Reject, the owner-bot auto-replies to the customer with alternatives + WhatsApp deep link — no silent drops.
+
+Code: [`bots/owner_bot.py`](bots/owner_bot.py), [`bots/shared/conversation_state.py`](bots/shared/conversation_state.py), [`bots/shared/approval_queue.py`](bots/shared/approval_queue.py). Setup walkthrough: [`docs/TELEGRAM_SETUP.md`](docs/TELEGRAM_SETUP.md).
 
 ---
 
