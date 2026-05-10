@@ -85,12 +85,17 @@ async def run_claude(
         "--allowedTools", allowed_tools,
         "--permission-mode", "acceptEdits",
         "--max-turns", str(max_turns),
-        "--output-format", "text",
+        # JSON output is always UTF-8 even when stdout codepage isn't (Windows
+        # pipes default to cp1251/cp1252 → em-dashes come out as `�` with
+        # `text` mode). The JSON wrapper has a `result` field with the agent's
+        # full output, properly escaped.
+        "--output-format", "json",
     ]
     if brand:
         args.extend(["--append-system-prompt", brand])
 
-    env = {**os.environ, "MCP_TIMEOUT": "15000"}
+    # Force UTF-8 on the child too, in case it touches anything Python-side.
+    env = {**os.environ, "MCP_TIMEOUT": "15000", "PYTHONIOENCODING": "utf-8"}
     proc = await asyncio.create_subprocess_exec(
         *args,
         stdin=asyncio.subprocess.DEVNULL,
@@ -111,7 +116,17 @@ async def run_claude(
             f"claude -p /{command_name} exited {proc.returncode}: {stderr.decode('utf-8', errors='replace')[:400]}"
         )
 
-    out = stdout.decode("utf-8", errors="replace")
+    raw = stdout.decode("utf-8", errors="replace")
+    # Unwrap JSON envelope from claude -p --output-format json:
+    #   { "type": "result", "subtype": "success", "result": "<agent's text>", ... }
+    try:
+        wrapper = json.loads(raw)
+        out = wrapper.get("result") if isinstance(wrapper, dict) else raw
+        if not isinstance(out, str):
+            out = raw
+    except json.JSONDecodeError:
+        out = raw
+
     env_out = _extract_envelope(out)
     if not env_out:
         # Surface the raw text so the bot can show it to the owner instead of swallowing.
