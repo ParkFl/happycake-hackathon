@@ -16,7 +16,7 @@ const REAL_PHONE_DISPLAY = "(281) 979-8320";
  * takes over the chat.
  */
 export default function AssistantWidget() {
-  const { messages, send, pending, hydrated, isOpenRequested, pendingPrefill, consumeOpenRequest, liveOwner } = useChat();
+  const { messages, send, pending, hydrated, isOpenRequested, pendingPrefill, consumeOpenRequest, liveOwner, handoffPending, sessionRef } = useChat();
   const cart = useCart();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -107,14 +107,23 @@ export default function AssistantWidget() {
               sm:bottom-20 sm:right-4 sm:left-auto sm:h-[70vh] sm:w-[380px] sm:rounded-md
             "
           >
-            <header className={`flex items-center justify-between rounded-t-md px-4 py-3 text-cream-50 ${liveOwner ? "bg-accent-coral" : "bg-happy-blue-700"}`}>
+            <header className={`flex items-center justify-between rounded-t-md px-4 py-3 text-cream-50 ${liveOwner ? "bg-accent-coral" : handoffPending ? "bg-happy-blue-900" : "bg-happy-blue-700"}`}>
               <div>
                 <strong className="font-display text-lg leading-none">
-                  {liveOwner ? "👤 You're chatting with the team" : "HappyCake assistant"}
+                  {liveOwner
+                    ? "👤 You're chatting with the team"
+                    : handoffPending
+                    ? "🛎 Team notified"
+                    : "HappyCake assistant"}
                 </strong>
                 <p className="m-0 text-xs text-cream-50/80">
-                  {liveOwner ? "A team member jumped in — replies are from a person." : "Live chat · Sugar Land kitchen"}
+                  {liveOwner
+                    ? "A team member jumped in — replies are from a person."
+                    : handoffPending
+                    ? "Waiting for the team to jump in here…"
+                    : "Live chat · Sugar Land kitchen"}
                   {cart.count > 0 && <> · cart: {cart.count} item{cart.count === 1 ? "" : "s"}</>}
+                  {sessionRef && <> · #{sessionRef}</>}
                 </p>
               </div>
               <button

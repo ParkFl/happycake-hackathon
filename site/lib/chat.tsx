@@ -53,6 +53,13 @@ type ChatCtx = {
   consumeOpenRequest: () => void;
   // True while a real teammate is handling the chat instead of the bot.
   liveOwner: boolean;
+  // True after the agent has flagged this session for owner handoff
+  // (handoff_acknowledged on the /api/chat response). Used to show a
+  // "team notified — waiting" indicator and to switch polling to fast cadence.
+  handoffPending: boolean;
+  // Last 6 chars of the session id — surfaced in the chat header so the owner
+  // can sanity-check that the Telegram thread_key matches the customer tab.
+  sessionRef: string;
 };
 
 const Ctx = createContext<ChatCtx | null>(null);
@@ -98,11 +105,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [isOpenRequested, setIsOpenRequested] = useState(false);
   const [pendingPrefill, setPendingPrefill] = useState<string | null>(null);
   const [liveOwner, setLiveOwner] = useState(false);
+  const [handoffPending, setHandoffPending] = useState(false);
   const messagesRef = useRef<ChatMsg[]>([]);
   const sessionIdRef = useRef<string>("");
   const cart = useCart();
 
   if (!sessionIdRef.current) sessionIdRef.current = getOrCreateSessionId();
+  const sessionRef = sessionIdRef.current.slice(-6).toUpperCase();
 
   // Hydrate from sessionStorage
   useEffect(() => {
@@ -170,6 +179,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         // reply; the polling effect below will pull the human's reply instead.
         const isLive = Boolean(data?.live);
         setLiveOwner(isLive);
+        // Once the agent has flagged the session for handoff (or it's already
+        // live), we keep polling fast — the team-member's first reply could land
+        // on the very next tick.
+        if (data?.handoff_acknowledged || isLive) setHandoffPending(true);
         if (!isLive) {
           const reply = (typeof data.reply_text === "string" && data.reply_text.trim())
             ? data.reply_text
@@ -216,15 +229,15 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         /* network blip — try again next tick */
       }
     };
-    // First tick eagerly, then on interval. Faster cadence (4s) when live so
-    // the customer sees the team reply quickly; slower (12s) otherwise just to
-    // catch the case where the owner takes over after the bot has already
-    // answered (but before the customer sends another message).
+    // First tick eagerly, then on interval. We poll fast (4s) whenever a
+    // handoff is in flight OR a teammate is already live — those are the
+    // moments where customer waiting matters most. Otherwise 12s is fine
+    // (catches the case where the owner takes over an idle thread).
     tick();
-    const interval = liveOwner ? 4000 : 12000;
+    const interval = (liveOwner || handoffPending) ? 4000 : 12000;
     const id = window.setInterval(tick, interval);
     return () => { cancelled = true; window.clearInterval(id); };
-  }, [hydrated, liveOwner]);
+  }, [hydrated, liveOwner, handoffPending]);
 
   const send = useCallback((text: string) => {
     const trimmed = text.trim();
@@ -260,8 +273,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       requestOpen,
       consumeOpenRequest,
       liveOwner,
+      handoffPending,
+      sessionRef,
     }),
-    [messages, busy, queue.length, send, clear, hydrated, isOpenRequested, pendingPrefill, requestOpen, consumeOpenRequest, liveOwner]
+    [messages, busy, queue.length, send, clear, hydrated, isOpenRequested, pendingPrefill, requestOpen, consumeOpenRequest, liveOwner, handoffPending, sessionRef]
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
