@@ -42,15 +42,46 @@ else
   green "  ✓ Already linked (.vercel/project.json present)."
 fi
 
-blue "[3/4] Setting HAPPYCAKE_TEAM_TOKEN as a Production env var…"
+blue "[3/4] Setting HAPPYCAKE_TEAM_TOKEN + LOCAL_AGENT_URL as Production env vars…"
 if [ -z "${HAPPYCAKE_TEAM_TOKEN:-}" ]; then
   red "HAPPYCAKE_TEAM_TOKEN is empty in .env. Aborting."
   exit 1
 fi
-# vercel env add prompts; we feed the value via stdin and overwrite if it exists
-vercel env rm HAPPYCAKE_TEAM_TOKEN production --yes 2>/dev/null || true
-echo "$HAPPYCAKE_TEAM_TOKEN" | vercel env add HAPPYCAKE_TEAM_TOKEN production 2>&1 | tail -3
-green "  ✓ Token pushed to Vercel (Production scope)."
+
+# Helper: write value to a temp file, redirect from it.
+# `echo $VAR | vercel env add` loses stdin on some Windows MSYS-bash setups —
+# the file redirect is the only reliable way to feed the value.
+push_env() {
+  local name="$1" value="$2"
+  local tmp
+  tmp=$(mktemp)
+  printf '%s' "$value" > "$tmp"
+  vercel env rm "$name" production --yes 2>/dev/null || true
+  vercel env add "$name" production < "$tmp" 2>&1 | tail -3
+  rm -f "$tmp"
+}
+
+push_env HAPPYCAKE_TEAM_TOKEN "$HAPPYCAKE_TEAM_TOKEN"
+green "  ✓ HAPPYCAKE_TEAM_TOKEN pushed."
+
+# LOCAL_AGENT_URL = the public ngrok / Cloudflare URL pointing at owner_bot:8000.
+# Without it, prod /api/chat falls back to the offline message and
+# /api/chat/poll returns no live-owner messages — site chat becomes one-way.
+if [ -n "${LOCAL_AGENT_URL:-}" ]; then
+  push_env LOCAL_AGENT_URL "$LOCAL_AGENT_URL"
+  green "  ✓ LOCAL_AGENT_URL pushed: $LOCAL_AGENT_URL"
+elif [ -n "${PUBLIC_WEBHOOK_BASE:-}" ]; then
+  push_env LOCAL_AGENT_URL "$PUBLIC_WEBHOOK_BASE"
+  green "  ✓ LOCAL_AGENT_URL pushed (fell back to PUBLIC_WEBHOOK_BASE): $PUBLIC_WEBHOOK_BASE"
+else
+  yellow "  ! Neither LOCAL_AGENT_URL nor PUBLIC_WEBHOOK_BASE set in .env."
+  yellow "    Site chat in prod will show the offline fallback until you add one."
+fi
+
+if [ -n "${SITE_CHAT_TOKEN:-}" ]; then
+  push_env SITE_CHAT_TOKEN "$SITE_CHAT_TOKEN"
+  green "  ✓ SITE_CHAT_TOKEN pushed."
+fi
 
 blue "[4/4] Building + deploying to production…"
 URL=$(vercel deploy --prod --yes 2>&1 | tee /tmp/vercel-deploy.log | tail -1)
