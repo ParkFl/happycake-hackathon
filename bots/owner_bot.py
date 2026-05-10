@@ -790,6 +790,18 @@ async def on_button(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         ch, ident = thread_key.split(":", 1)
 
         if action == "takeover":
+            # One live chat at a time: hand back any OTHER live threads to the
+            # bot so the owner's free-text in Telegram unambiguously goes to the
+            # thread they just tapped, not a stale focus from earlier testing.
+            for other in conversation_state.list_active_live():
+                other_key = other.get("thread_key")
+                if other_key and other_key != thread_key:
+                    try:
+                        await _do_handback(other["channel"], other["identifier"])
+                        logger.info("auto-handback of %s before taking over %s", other_key, thread_key)
+                    except Exception as e:
+                        logger.warning("auto-handback %s failed: %s", other_key, e)
+
             rec = conversation_state.set_mode(ch, ident, "live_owner")
             notice = "A team member is jumping into this conversation now — give us just a moment."
             try:
